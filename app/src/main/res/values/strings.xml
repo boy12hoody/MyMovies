@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyMovies</string>
+
+    <string name="tab_popular">Popular</string>
+    <string name="tab_top_rated">Top Rated</string>
+    <string name="tab_upcoming">Upcoming</string>
+    <string name="movie_image">Movie Image</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

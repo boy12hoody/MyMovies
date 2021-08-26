@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_top_rated"
+    app:startDestination="@id/topRatedFragment">
+    <fragment
+        android:id="@+id/topRatedFragment"
+        android:name="uz.boywonder.mymovies.ui.topRatedTab.TopRatedFragment"
+        android:label="fragment_top_rated"
+        tools:layout="@layout/fragment_top_rated" />
+</navigation>
