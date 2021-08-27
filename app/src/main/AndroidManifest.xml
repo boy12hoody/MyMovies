@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
+        android:usesCleartextTraffic="true"
         android:name="uz.boywonder.MyApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"

@@ -2,32 +2,19 @@ package uz.boywonder.mymovies.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import uz.boywonder.mymovies.R
 import uz.boywonder.mymovies.databinding.MovieRowLayoutBinding
+import uz.boywonder.mymovies.models.MovieList
 import uz.boywonder.mymovies.models.Result
+import uz.boywonder.mymovies.util.MyDiffUtil
 
 class MoviesListAdapter(private val listener: OnItemClickListener) :
-    PagingDataAdapter<Result, MoviesListAdapter.MoviesViewHolder>(MOVIE_COMPARATOR) {
+    RecyclerView.Adapter<MoviesListAdapter.MoviesViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        val binding =
-            MovieRowLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return MoviesViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-        val currentItem = getItem(position)
-
-        if (currentItem != null) {
-            holder.bind(currentItem)
-        }
-    }
-
+    private var movies = emptyList<Result>()
 
     inner class MoviesViewHolder(private val binding: MovieRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -36,10 +23,8 @@ class MoviesListAdapter(private val listener: OnItemClickListener) :
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val item = getItem(position)
-                    if (item != null) {
-                        listener.OnItemClick(item)
-                    }
+                    val item = movies[position]
+                    listener.OnItemClick(item)
                 }
             }
         }
@@ -56,19 +41,33 @@ class MoviesListAdapter(private val listener: OnItemClickListener) :
         }
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
+        val binding =
+            MovieRowLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return MoviesViewHolder(binding)
+    }
+
+
+    override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
+        val currentItem = movies[position]
+        holder.bind(currentItem)
+    }
+
+
     interface OnItemClickListener {
         fun OnItemClick(result: Result)
     }
 
-    companion object {
-        private val MOVIE_COMPARATOR = object : DiffUtil.ItemCallback<Result>() {
-            override fun areItemsTheSame(oldItem: Result, newItem: Result) =
-                oldItem.id == newItem.id
+    override fun getItemCount(): Int {
+        return movies.size
+    }
 
-
-            override fun areContentsTheSame(oldItem: Result, newItem: Result) =
-                oldItem == newItem
-
-        }
+    // To check the updated data with older one to improve performance and accuracy of the app
+    fun setNewData(newData: MovieList) {
+        val diffUtil = MyDiffUtil(movies, newData.results)
+        val diffUtilResult = DiffUtil.calculateDiff(diffUtil)
+        movies = newData.results
+        diffUtilResult.dispatchUpdatesTo(this)
     }
 }

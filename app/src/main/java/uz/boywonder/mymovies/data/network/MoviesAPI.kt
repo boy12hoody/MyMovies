@@ -7,7 +7,7 @@ import uz.boywonder.mymovies.models.MovieList
 
 interface MoviesAPI {
 
-    @GET("/movie/popular/")
+    @GET("movie/popular/")
     suspend fun getPopular(
         @QueryMap queries: Map<String, String>
     ): Response<MovieList>

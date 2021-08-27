@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import uz.boywonder.mymovies.R
 import uz.boywonder.mymovies.adapters.MoviesListAdapter
@@ -20,6 +22,7 @@ import uz.boywonder.mymovies.util.Constants.Companion.QUERY_API_KEY
 import uz.boywonder.mymovies.util.NetworkListener
 import uz.boywonder.mymovies.util.NetworkResult
 
+@AndroidEntryPoint
 class PopularFragment : Fragment(R.layout.fragment_popular), MoviesListAdapter.OnItemClickListener {
 
     private val binding: FragmentPopularBinding by viewBinding()
@@ -76,7 +79,14 @@ class PopularFragment : Fragment(R.layout.fragment_popular), MoviesListAdapter.O
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    response.data?.let { moviesListAdapter.submitData(viewLifecycleOwner.lifecycle, it) }
+                    response.data?.let { moviesListAdapter.setNewData(it) }
+                }
+                is NetworkResult.Error -> {
+                    hideShimmerEffect()
+                    Toast.makeText(context, response.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+                    showShimmerEffect()
                 }
             }
         }
@@ -86,7 +96,7 @@ class PopularFragment : Fragment(R.layout.fragment_popular), MoviesListAdapter.O
         val queries: HashMap<String, String> = HashMap()
 
 
-        queries[QUERY_API_KEY] = "<<$API_KEY>>"
+        queries[QUERY_API_KEY] = API_KEY
 
         return queries
     }
