@@ -39,9 +39,17 @@
                 android:id="@+id/movieName_textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Movie Name"
+                tools:text="Movie Name"
                 android:textAlignment="center"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/movieDate_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceBody2"
+                tools:text="2000" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -9,7 +9,7 @@ import uz.boywonder.mymovies.ui.navHosts.FirstFragmentNavHost
 import uz.boywonder.mymovies.ui.navHosts.SecondFragmentNavHost
 import uz.boywonder.mymovies.ui.navHosts.ThirdFragmentNavHost
 
-class PagerAdapter(
+class ViewPagerAdapter(
     fragmentManager: FragmentManager, lifecycle: Lifecycle
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 

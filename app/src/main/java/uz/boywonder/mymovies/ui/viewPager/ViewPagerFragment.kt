@@ -6,7 +6,7 @@ import android.viewbinding.library.fragment.viewBinding
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import uz.boywonder.mymovies.R
-import uz.boywonder.mymovies.adapters.PagerAdapter
+import uz.boywonder.mymovies.adapters.ViewPagerAdapter
 import uz.boywonder.mymovies.databinding.FragmentViewPagerBinding
 
 class ViewPagerFragment : Fragment(R.layout.fragment_view_pager) {
@@ -21,7 +21,7 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager) {
         titles.add(getString(R.string.tab_top_rated))
         titles.add(getString(R.string.tab_upcoming))
 
-        val pagerAdapter = PagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
+        val pagerAdapter = ViewPagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
 
         binding.apply {
             viewPager2.adapter = pagerAdapter

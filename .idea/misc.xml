@@ -17,7 +17,7 @@
         <entry key="app/src/main/res/layout/fragment_top_rated.xml" value="0.18125" />
         <entry key="app/src/main/res/layout/fragment_upcoming.xml" value="0.18125" />
         <entry key="app/src/main/res/layout/fragment_view_pager.xml" value="0.1671875" />
-        <entry key="app/src/main/res/layout/movie_row_layout.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/movie_row_layout.xml" value="0.5" />
         <entry key="app/src/main/res/layout/placeholder_row_layout.xml" value="0.22" />
       </map>
     </option>
