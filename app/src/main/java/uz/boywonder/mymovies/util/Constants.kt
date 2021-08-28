@@ -8,6 +8,11 @@ class Constants {
         const val BASE_URL = "https://api.themoviedb.org/3/"
         const val BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342"
 
+        // CATEGORIES
+        const val CAT_POPULAR = "popular"
+        const val CAT_TOP_RATED = "top_rated"
+        const val CAT_UPCOMING = "upcoming"
+
         // API QUERIES
 
         const val QUERY_API_KEY = "api_key"

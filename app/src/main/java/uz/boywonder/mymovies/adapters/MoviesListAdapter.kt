@@ -9,6 +9,7 @@ import uz.boywonder.mymovies.R
 import uz.boywonder.mymovies.databinding.MovieRowLayoutBinding
 import uz.boywonder.mymovies.models.MovieList
 import uz.boywonder.mymovies.models.Result
+import uz.boywonder.mymovies.util.Constants.Companion.BASE_POSTER_PATH
 import uz.boywonder.mymovies.util.MyDiffUtil
 
 class MoviesListAdapter(private val listener: OnItemClickListener) :
@@ -33,7 +34,7 @@ class MoviesListAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 movieNameTextView.text = result.title
                 movieDateTextView.text = result.releaseDate
-                movieImageView.load(result.posterPath) {
+                movieImageView.load(BASE_POSTER_PATH + result.posterPath) {
                     crossfade(600)
                     error(R.drawable.ic_no_image)
                 }

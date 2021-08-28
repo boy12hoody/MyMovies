@@ -25,31 +25,31 @@ class MainViewModel @Inject constructor(
 
     /* INIT VARIABLES */
 
-    private var _moviesPopularLiveData: MutableLiveData<NetworkResult<MovieList>> = MutableLiveData()
-    val moviesPopularLiveData: LiveData<NetworkResult<MovieList>> get() = _moviesPopularLiveData
+    private var _moviesLiveData: MutableLiveData<NetworkResult<MovieList>> = MutableLiveData()
+    val moviesLiveData: LiveData<NetworkResult<MovieList>> get() = _moviesLiveData
 
     /* RETROFIT */
 
-    fun moviesPopularResponse(queries: Map<String, String>) = viewModelScope.launch {
-        moviesPopularResponseSafeCall(queries)
+    fun getMoviesResponse(category: String, queries: Map<String, String>) = viewModelScope.launch {
+        getMoviesResponseSafeCall(category, queries)
     }
 
-    private suspend fun moviesPopularResponseSafeCall(queries: Map<String, String>) {
-        _moviesPopularLiveData.value = NetworkResult.Loading()
+    private suspend fun getMoviesResponseSafeCall(category: String, queries: Map<String, String>) {
+        _moviesLiveData.value = NetworkResult.Loading()
 
         if (hasInternetConnection()) {
             try {
-                val response = repository.remote.getPopular(queries)
-                _moviesPopularLiveData.value = handleMoviesListResponse(response)
+                val response = repository.remote.getMovies(category, queries)
+                _moviesLiveData.value = handleMoviesResponse(response)
             } catch (e: Exception) {
-                _moviesPopularLiveData.value = NetworkResult.Error("Something went wrong.")
+                _moviesLiveData.value = NetworkResult.Error("Something went wrong.")
                 Log.e("MainViewModel", e.message.toString())
             }
 
         }
     }
 
-    private fun handleMoviesListResponse(response: Response<MovieList>): NetworkResult<MovieList> {
+    private fun handleMoviesResponse(response: Response<MovieList>): NetworkResult<MovieList> {
         return when {
             response.body()!!.results.isNullOrEmpty() -> {
                 NetworkResult.Error("No Movie Found.")

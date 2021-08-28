@@ -8,7 +8,7 @@ import javax.inject.Inject
 class RemoteDataSource @Inject constructor(
     private val moviesAPI: MoviesAPI
 ) {
-    suspend fun getPopular(queries: Map<String, String>): Response<MovieList> {
-        return moviesAPI.getPopular(queries)
+    suspend fun getMovies(category: String, queries: Map<String, String>): Response<MovieList> {
+        return moviesAPI.getMovies(category, queries)
     }
 }

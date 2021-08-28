@@ -7,19 +7,20 @@ import android.viewbinding.library.fragment.viewBinding
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import uz.boywonder.mymovies.R
 import uz.boywonder.mymovies.adapters.MoviesListAdapter
 import uz.boywonder.mymovies.databinding.FragmentPopularBinding
 import uz.boywonder.mymovies.models.Result
 import uz.boywonder.mymovies.ui.MainViewModel
 import uz.boywonder.mymovies.util.Constants.Companion.API_KEY
+import uz.boywonder.mymovies.util.Constants.Companion.CAT_POPULAR
 import uz.boywonder.mymovies.util.Constants.Companion.QUERY_API_KEY
-import uz.boywonder.mymovies.util.NetworkListener
 import uz.boywonder.mymovies.util.NetworkResult
 
 @AndroidEntryPoint
@@ -27,55 +28,32 @@ class PopularFragment : Fragment(R.layout.fragment_popular), MoviesListAdapter.O
 
     private val binding: FragmentPopularBinding by viewBinding()
     private val mainViewModel: MainViewModel by viewModels()
-    private lateinit var networkListener: NetworkListener
     private val moviesListAdapter by lazy { MoviesListAdapter(this) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRecyclerView()
 
-        lifecycleScope.launchWhenStarted {
-            networkListener = NetworkListener()
-            networkListener.checkNetworkAvailability(requireContext()).collect { status ->
-                Log.d("NetworkListener", status.toString())
+        // Every time network status changes, reads local database first
+        // readDatabase()
 
-                when (status) {
 
-                    true -> {
-                        if (mainViewModel.isOffline) {
-                            Snackbar.make(
-                                requireView(), "Back Online.", Snackbar.LENGTH_SHORT
-                            ).setAction("Okay") {}.show()
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-                            mainViewModel.isOffline = false
-                        }
-                    }
-
-                    false -> {
-                        Snackbar.make(
-                            requireView(), "No Internet Connection.", Snackbar.LENGTH_SHORT
-                        ).setAction("Okay") {}.show()
-
-                        mainViewModel.isOffline = true
-                    }
-
-                }
-
-                // Every time network status changes, reads local database first
-                // readDatabase()
+                setupRecyclerView()
 
                 // For Now
                 requestApiData()
             }
         }
+
     }
 
     private fun requestApiData() {
-
         Log.d("PopularFragment", "requestApiData() Called")
-        mainViewModel.moviesPopularResponse(applyQuery())
-        mainViewModel.moviesPopularLiveData.observe(viewLifecycleOwner) { response ->
+        mainViewModel.getMoviesResponse(CAT_POPULAR, applyQuery())
+        mainViewModel.moviesLiveData.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
@@ -83,7 +61,8 @@ class PopularFragment : Fragment(R.layout.fragment_popular), MoviesListAdapter.O
                 }
                 is NetworkResult.Error -> {
                     hideShimmerEffect()
-                    Toast.makeText(context, response.message.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, response.message.toString(), Toast.LENGTH_SHORT)
+                        .show()
                 }
                 is NetworkResult.Loading -> {
                     showShimmerEffect()
@@ -94,8 +73,6 @@ class PopularFragment : Fragment(R.layout.fragment_popular), MoviesListAdapter.O
 
     private fun applyQuery(): HashMap<String, String> {
         val queries: HashMap<String, String> = HashMap()
-
-
         queries[QUERY_API_KEY] = API_KEY
 
         return queries
