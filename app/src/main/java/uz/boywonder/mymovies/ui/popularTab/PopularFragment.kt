@@ -18,9 +18,7 @@ import uz.boywonder.mymovies.adapters.MoviesListAdapter
 import uz.boywonder.mymovies.databinding.FragmentPopularBinding
 import uz.boywonder.mymovies.models.Result
 import uz.boywonder.mymovies.ui.MainViewModel
-import uz.boywonder.mymovies.util.Constants.Companion.API_KEY
 import uz.boywonder.mymovies.util.Constants.Companion.CAT_POPULAR
-import uz.boywonder.mymovies.util.Constants.Companion.QUERY_API_KEY
 import uz.boywonder.mymovies.util.NetworkResult
 
 @AndroidEntryPoint
@@ -73,7 +71,6 @@ class PopularFragment : Fragment(R.layout.fragment_popular), MoviesListAdapter.O
 
     private fun applyQuery(): HashMap<String, String> {
         val queries: HashMap<String, String> = HashMap()
-        queries[QUERY_API_KEY] = API_KEY
 
         return queries
     }

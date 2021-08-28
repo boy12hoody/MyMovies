@@ -15,6 +15,7 @@ class Constants {
 
         // API QUERIES
 
-        const val QUERY_API_KEY = "api_key"
+        const val QUERY_PAGE_NUMBER = "page"
+        const val TOTAL_PAGE_NUMBER = 100
     }
 }
