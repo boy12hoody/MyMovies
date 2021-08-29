@@ -9,7 +9,7 @@ data class MovieList(
     @Json(name = "page")
     val page: Int = 0,
     @Json(name = "results")
-    val results: List<Result> = listOf(),
+    val results: MutableList<Result> = mutableListOf(),
     @Json(name = "total_pages")
     val totalPages: Int = 0,
     @Json(name = "total_results")

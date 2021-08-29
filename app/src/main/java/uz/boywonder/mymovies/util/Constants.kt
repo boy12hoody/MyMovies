@@ -16,6 +16,8 @@ class Constants {
         // API QUERIES
 
         const val QUERY_PAGE_NUMBER = "page"
-        const val TOTAL_PAGE_NUMBER = 100
+        const val QUERY_PAGE_SIZE = 20
+        const val QUERY_LANGUAGE = "language"
+        const val QUERY_LANG_ENG = "en-US"
     }
 }

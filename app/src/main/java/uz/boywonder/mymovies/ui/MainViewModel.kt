@@ -14,6 +14,9 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import uz.boywonder.mymovies.data.Repository
 import uz.boywonder.mymovies.models.MovieList
+import uz.boywonder.mymovies.util.Constants.Companion.CAT_POPULAR
+import uz.boywonder.mymovies.util.Constants.Companion.CAT_TOP_RATED
+import uz.boywonder.mymovies.util.Constants.Companion.CAT_UPCOMING
 import uz.boywonder.mymovies.util.NetworkResult
 import javax.inject.Inject
 
@@ -27,6 +30,11 @@ class MainViewModel @Inject constructor(
 
     private var _moviesLiveData: MutableLiveData<NetworkResult<MovieList>> = MutableLiveData()
     val moviesLiveData: LiveData<NetworkResult<MovieList>> get() = _moviesLiveData
+    private var movieListData: MovieList? = null
+
+    var moviesPopularPage = 1
+    var moviesTopRatedPage = 1
+    var moviesUpcomingPage = 1
 
     /* RETROFIT */
 
@@ -40,7 +48,7 @@ class MainViewModel @Inject constructor(
         if (hasInternetConnection()) {
             try {
                 val response = repository.remote.getMovies(category, queries)
-                _moviesLiveData.value = handleMoviesResponse(response)
+                _moviesLiveData.value = handleMoviesResponse(category, response)
             } catch (e: Exception) {
                 _moviesLiveData.value = NetworkResult.Error("Something went wrong.")
                 Log.e("MainViewModel", e.message.toString())
@@ -49,17 +57,38 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun handleMoviesResponse(response: Response<MovieList>): NetworkResult<MovieList> {
-        return when {
-            response.body()!!.results.isNullOrEmpty() -> {
-                NetworkResult.Error("No Movie Found.")
+    private fun handleMoviesResponse(
+        category: String,
+        response: Response<MovieList>
+    ): NetworkResult<MovieList> {
+
+        if (response.isSuccessful) {
+            response.body()?.let { responseResult ->
+                when (category) {
+                    CAT_POPULAR -> {
+                        moviesPopularPage++
+                    }
+                    CAT_TOP_RATED -> {
+                        moviesTopRatedPage++
+                    }
+                    CAT_UPCOMING -> {
+                        moviesUpcomingPage++
+                    }
+                }
+
+                if (movieListData == null) {
+                    movieListData = response.body()
+                } else {
+                    val oldMovieListData = movieListData?.results
+                    val newMovieListData = response.body()?.results
+                    oldMovieListData?.addAll(newMovieListData!!)
+                }
+                return NetworkResult.Success(movieListData ?: responseResult)
             }
-            response.isSuccessful -> {
-                val movieListData = response.body()
-                NetworkResult.Success(movieListData!!)
-            }
-            else -> NetworkResult.Error(response.message())
+        } else if (response.body()!!.results.isNullOrEmpty()) {
+            return NetworkResult.Error("No Movie Found.")
         }
+        return NetworkResult.Error(response.message())
     }
 
 

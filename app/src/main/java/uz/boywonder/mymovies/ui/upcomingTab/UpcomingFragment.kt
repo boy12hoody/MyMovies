@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
+import android.widget.AbsListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import uz.boywonder.mymovies.R
@@ -18,7 +20,12 @@ import uz.boywonder.mymovies.adapters.MoviesListAdapter
 import uz.boywonder.mymovies.databinding.FragmentUpcomingBinding
 import uz.boywonder.mymovies.models.Result
 import uz.boywonder.mymovies.ui.MainViewModel
+import uz.boywonder.mymovies.util.Constants
 import uz.boywonder.mymovies.util.Constants.Companion.CAT_UPCOMING
+import uz.boywonder.mymovies.util.Constants.Companion.QUERY_LANGUAGE
+import uz.boywonder.mymovies.util.Constants.Companion.QUERY_LANG_ENG
+import uz.boywonder.mymovies.util.Constants.Companion.QUERY_PAGE_NUMBER
+import uz.boywonder.mymovies.util.Constants.Companion.QUERY_PAGE_SIZE
 import uz.boywonder.mymovies.util.NetworkResult
 
 @AndroidEntryPoint
@@ -32,14 +39,10 @@ class UpcomingFragment : Fragment(R.layout.fragment_upcoming),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Every time network status changes, reads local database first
-        // readDatabase()
-
+        setupRecyclerView()
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-
-                setupRecyclerView()
 
                 // For Now
                 requestApiData()
@@ -49,7 +52,7 @@ class UpcomingFragment : Fragment(R.layout.fragment_upcoming),
     }
 
     private fun requestApiData() {
-        Log.d("TopRatedFragment", "requestApiData() Called")
+        Log.d("UpcomingFragment", "requestApiData() Called")
         mainViewModel.getMoviesResponse(CAT_UPCOMING, applyQuery())
         mainViewModel.moviesLiveData.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -71,7 +74,7 @@ class UpcomingFragment : Fragment(R.layout.fragment_upcoming),
 
     private fun applyQuery(): HashMap<String, String> {
         val queries: HashMap<String, String> = HashMap()
-
+        queries[QUERY_PAGE_NUMBER] = mainViewModel.moviesUpcomingPage.toString()
         return queries
     }
 
@@ -89,7 +92,6 @@ class UpcomingFragment : Fragment(R.layout.fragment_upcoming),
             shimmerFrameLayout.visibility = View.VISIBLE
             recyclerview.visibility = View.GONE
         }
-
     }
 
     private fun hideShimmerEffect() {
@@ -98,7 +100,6 @@ class UpcomingFragment : Fragment(R.layout.fragment_upcoming),
             shimmerFrameLayout.visibility = View.GONE
             recyclerview.visibility = View.VISIBLE
         }
-
     }
 
     override fun OnItemClick(result: Result) {
