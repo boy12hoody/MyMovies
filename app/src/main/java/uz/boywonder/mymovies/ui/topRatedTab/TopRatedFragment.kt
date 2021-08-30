@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,12 +19,9 @@ import kotlinx.coroutines.launch
 import uz.boywonder.mymovies.R
 import uz.boywonder.mymovies.adapters.MoviesListAdapter
 import uz.boywonder.mymovies.databinding.FragmentTopRatedBinding
-import uz.boywonder.mymovies.models.Result
+import uz.boywonder.mymovies.models.MovieResult
 import uz.boywonder.mymovies.ui.MainViewModel
-import uz.boywonder.mymovies.util.Constants
 import uz.boywonder.mymovies.util.Constants.Companion.CAT_TOP_RATED
-import uz.boywonder.mymovies.util.Constants.Companion.QUERY_LANGUAGE
-import uz.boywonder.mymovies.util.Constants.Companion.QUERY_LANG_ENG
 import uz.boywonder.mymovies.util.Constants.Companion.QUERY_PAGE_NUMBER
 import uz.boywonder.mymovies.util.Constants.Companion.QUERY_PAGE_SIZE
 import uz.boywonder.mymovies.util.NetworkResult
@@ -137,7 +135,9 @@ class TopRatedFragment : Fragment(R.layout.fragment_top_rated),
         }
     }
 
-    override fun OnItemClick(result: Result) {
-        TODO() //navigate to MovieDetailsFragment
+    override fun OnItemClick(movieResult: MovieResult) {
+        val action =
+            TopRatedFragmentDirections.actionTopRatedFragmentToMovieDetailsFragment2(movieResult)
+        findNavController().navigate(action)
     }
 }

@@ -8,5 +8,18 @@
         android:id="@+id/topRatedFragment"
         android:name="uz.boywonder.mymovies.ui.topRatedTab.TopRatedFragment"
         android:label="fragment_top_rated"
-        tools:layout="@layout/fragment_top_rated" />
+        tools:layout="@layout/fragment_top_rated" >
+        <action
+            android:id="@+id/action_topRatedFragment_to_movieDetailsFragment2"
+            app:destination="@id/movieDetailsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailsFragment2"
+        android:name="uz.boywonder.mymovies.ui.movieDetails.MovieDetailsFragment"
+        android:label="fragment_movie_details"
+        tools:layout="@layout/fragment_movie_details" >
+        <argument
+            android:name="movieResult"
+            app:argType="uz.boywonder.mymovies.models.MovieResult" />
+    </fragment>
 </navigation>

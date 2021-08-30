@@ -8,14 +8,14 @@ import coil.load
 import uz.boywonder.mymovies.R
 import uz.boywonder.mymovies.databinding.MovieRowLayoutBinding
 import uz.boywonder.mymovies.models.MovieList
-import uz.boywonder.mymovies.models.Result
+import uz.boywonder.mymovies.models.MovieResult
 import uz.boywonder.mymovies.util.Constants.Companion.BASE_POSTER_PATH
 import uz.boywonder.mymovies.util.MyDiffUtil
 
 class MoviesListAdapter(private val listener: OnItemClickListener) :
     RecyclerView.Adapter<MoviesListAdapter.MoviesViewHolder>() {
 
-    private var movies = emptyList<Result>()
+    private var movies = emptyList<MovieResult>()
 
     inner class MoviesViewHolder(private val binding: MovieRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -30,11 +30,11 @@ class MoviesListAdapter(private val listener: OnItemClickListener) :
             }
         }
 
-        fun bind(result: Result) {
+        fun bind(movieResult: MovieResult) {
             binding.apply {
-                movieNameTextView.text = result.title
-                movieDateTextView.text = result.releaseDate
-                movieImageView.load(BASE_POSTER_PATH + result.posterPath) {
+                movieNameTextView.text = movieResult.title
+                movieDateTextView.text = movieResult.releaseDate
+                movieImageView.load(BASE_POSTER_PATH + movieResult.posterPath) {
                     crossfade(600)
                     error(R.drawable.ic_no_image)
                 }
@@ -57,7 +57,7 @@ class MoviesListAdapter(private val listener: OnItemClickListener) :
 
 
     interface OnItemClickListener {
-        fun OnItemClick(result: Result)
+        fun OnItemClick(movieResult: MovieResult)
     }
 
     override fun getItemCount(): Int {
@@ -66,9 +66,9 @@ class MoviesListAdapter(private val listener: OnItemClickListener) :
 
     // To check the updated data with older one to improve performance and accuracy of the app
     fun setNewData(newData: MovieList) {
-        val diffUtil = MyDiffUtil(movies, newData.results)
+        val diffUtil = MyDiffUtil(movies, newData.movieResults)
         val diffUtilResult = DiffUtil.calculateDiff(diffUtil)
-        movies = newData.results
+        movies = newData.movieResults
         diffUtilResult.dispatchUpdatesTo(this)
     }
 }

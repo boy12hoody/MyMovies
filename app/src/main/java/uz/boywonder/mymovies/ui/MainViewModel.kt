@@ -79,17 +79,19 @@ class MainViewModel @Inject constructor(
                 if (movieListData == null) {
                     movieListData = response.body()
                 } else {
-                    val oldMovieListData = movieListData?.results
-                    val newMovieListData = response.body()?.results
+                    val oldMovieListData = movieListData?.movieResults
+                    val newMovieListData = response.body()?.movieResults
                     oldMovieListData?.addAll(newMovieListData!!)
                 }
                 return NetworkResult.Success(movieListData ?: responseResult)
             }
-        } else if (response.body()!!.results.isNullOrEmpty()) {
+        } else if (response.body()!!.movieResults.isNullOrEmpty()) {
             return NetworkResult.Error("No Movie Found.")
         }
         return NetworkResult.Error(response.message())
     }
+
+    /* Handle View Pager State */
 
 
     // checking internet connection. returns true or false.
