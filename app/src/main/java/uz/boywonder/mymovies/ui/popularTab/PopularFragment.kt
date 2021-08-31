@@ -136,7 +136,7 @@ class PopularFragment : Fragment(R.layout.fragment_popular), MoviesListAdapter.O
 
     override fun OnItemClick(movieResult: MovieResult) {
         val action =
-            PopularFragmentDirections.actionPopularFragmentToMovieDetailsFragment(movieResult)
+            PopularFragmentDirections.actionPopularFragmentToMovieDetailsFragment(movieResult.id)
         findNavController().navigate(action)
     }
 }

@@ -1,9 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.actorDetails.ActorDetailsFragment">
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content_Layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/actor_imageView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="30dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/CircleImageView"
+                app:strokeColor="@color/strokeColor"
+                app:strokeWidth="1dp"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Name"
+                android:textColor="@color/darkGray"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/actor_imageView" />
+
+            <ImageView
+                android:id="@+id/date_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:contentDescription="Date"
+                android:src="@drawable/ic_release_date"
+                app:layout_constraintStart_toStartOf="@id/name_textView"
+                app:layout_constraintTop_toBottomOf="@+id/name_textView"
+                app:tint="@color/darkGray" />
+
+            <TextView
+                android:id="@+id/date_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Date"
+                android:textColor="@color/darkGray"
+                app:layout_constraintBottom_toBottomOf="@+id/date_imageView"
+                app:layout_constraintStart_toEndOf="@+id/date_imageView"
+                app:layout_constraintTop_toTopOf="@+id/date_imageView" />
+
+
+            <ImageView
+                android:id="@+id/location_ImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:contentDescription="Location"
+                android:src="@drawable/ic_location"
+                app:layout_constraintBottom_toBottomOf="@id/date_textView"
+                app:layout_constraintStart_toEndOf="@id/date_textView"
+                app:layout_constraintTop_toTopOf="@+id/date_textView"
+                app:tint="@color/darkGray" />
+
+            <TextView
+                android:id="@+id/location_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Location"
+                android:textColor="@color/darkGray"
+                app:layout_constraintEnd_toEndOf="@id/name_textView"
+                app:layout_constraintBottom_toBottomOf="@+id/location_ImageView"
+                app:layout_constraintStart_toEndOf="@+id/location_ImageView"
+                app:layout_constraintTop_toTopOf="@+id/location_ImageView" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/bioTitle_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="20dp"
+                android:text="Bio"
+                android:textColor="@color/darkGray"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/date_textView" />
+
+
+            <TextView
+                android:id="@+id/bio_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/bioTitle_textView"
+                tools:text="Loren Ipsum" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/creditsTitle_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginVertical="20dp"
+                android:text="Movie Credits"
+                android:textColor="@color/darkGray"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bio_textView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/credits_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:layout_marginHorizontal="12dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/creditsTitle_textView"
+                tools:itemCount="5"
+                tools:listitem="@layout/credits_row_layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

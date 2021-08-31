@@ -2,9 +2,7 @@ package uz.boywonder.mymovies.data
 
 import retrofit2.Response
 import uz.boywonder.mymovies.data.network.MoviesAPI
-import uz.boywonder.mymovies.models.CastList
-import uz.boywonder.mymovies.models.MovieDetails
-import uz.boywonder.mymovies.models.MovieList
+import uz.boywonder.mymovies.models.*
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(
@@ -20,5 +18,13 @@ class RemoteDataSource @Inject constructor(
 
     suspend fun getCredits(movieId: Int): Response<CastList> {
         return moviesAPI.getCredits(movieId)
+    }
+
+    suspend fun getPerson(personId: Int): Response<Person> {
+        return moviesAPI.getPerson(personId)
+    }
+
+    suspend fun getPersonCredits(personId: Int): Response<MoviesByPerson> {
+        return moviesAPI.getPersonCredits(personId)
     }
 }

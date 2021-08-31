@@ -1,4 +1,4 @@
-package uz.boywonder.mymovies.ui.movieDetails
+package uz.boywonder.mymovies.ui.actorDetails
 
 import android.app.Application
 import android.content.Context
@@ -13,88 +13,85 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import uz.boywonder.mymovies.data.Repository
-import uz.boywonder.mymovies.models.CastList
-import uz.boywonder.mymovies.models.MovieDetails
+import uz.boywonder.mymovies.models.MoviesByPerson
+import uz.boywonder.mymovies.models.Person
 import uz.boywonder.mymovies.util.NetworkResult
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieDetailsViewModel @Inject constructor(
+class ActorDetailsViewModel @Inject constructor(
     private val repository: Repository,
     application: Application
 ) : AndroidViewModel(application) {
 
     /* INIT VARIABLES */
 
-    private var _movieLiveData: MutableLiveData<NetworkResult<MovieDetails>> = MutableLiveData()
-    val movieLiveData: LiveData<NetworkResult<MovieDetails>> get() = _movieLiveData
+    private var _personLiveData: MutableLiveData<NetworkResult<Person>> = MutableLiveData()
+    val personLiveData: LiveData<NetworkResult<Person>> get() = _personLiveData
 
-    private var _castLiveData: MutableLiveData<NetworkResult<CastList>> = MutableLiveData()
-    val castLiveData: MutableLiveData<NetworkResult<CastList>> get() = _castLiveData
+    private var _personCreditsLiveData: MutableLiveData<NetworkResult<MoviesByPerson>> =
+        MutableLiveData()
+    val personCreditsLiveData: LiveData<NetworkResult<MoviesByPerson>> get() = _personCreditsLiveData
 
     /* RETROFIT */
 
-    /* GET A MOVIE */
-
-    fun getMovieResponse(movieId: Int) = viewModelScope.launch {
-        getMovieResponseSafeCall(movieId)
+    fun getPersonResponse(personId: Int) = viewModelScope.launch {
+        getPersonResponseSafeCall(personId)
     }
 
-    private suspend fun getMovieResponseSafeCall(movieId: Int) {
-        _movieLiveData.value = NetworkResult.Loading()
+    private suspend fun getPersonResponseSafeCall(personId: Int) {
+        _personLiveData.value = NetworkResult.Loading()
 
         if (hasInternetConnection()) {
             try {
-                val response = repository.remote.getMovie(movieId)
-                _movieLiveData.value = handleMovieResponse(response)
+                val response = repository.remote.getPerson(personId)
+                _personLiveData.value = handlePersonResponse(response)
             } catch (e: Exception) {
-                _movieLiveData.value = NetworkResult.Error("Something went wrong.")
-                Log.e("MovieDetailsViewModel", e.message.toString())
+                _personLiveData.value = NetworkResult.Error("Something went wrong.")
+                Log.e("ActorDetailsViewModel", e.message.toString())
             }
-
         }
     }
 
-    private fun handleMovieResponse(response: Response<MovieDetails>): NetworkResult<MovieDetails> {
+    private fun handlePersonResponse(response: Response<Person>): NetworkResult<Person> {
         when {
             response.isSuccessful -> {
-                val movieData = response.body()
-                return NetworkResult.Success(movieData!!)
+                val personData = response.body()
+                return NetworkResult.Success(personData!!)
             }
             else -> return NetworkResult.Error(response.message())
         }
     }
 
-    /* GET CAST */
+    /* GET CREDITS BY THIS PERSON */
 
-    fun getCastResponse(movieId: Int) = viewModelScope.launch {
-        getCastResponseSafeCall(movieId)
+    fun getCreditsResponse(personId: Int) = viewModelScope.launch {
+        getCreditsResponseSafeCall(personId)
     }
 
-    private suspend fun getCastResponseSafeCall(movieId: Int) {
-        _castLiveData.value = NetworkResult.Loading()
+    private suspend fun getCreditsResponseSafeCall(personId: Int) {
+        _personCreditsLiveData.value = NetworkResult.Loading()
 
         if (hasInternetConnection()) {
             try {
-                val response = repository.remote.getCredits(movieId)
-                _castLiveData.value = handleCastResponse(response)
+                val response = repository.remote.getPersonCredits(personId)
+                _personCreditsLiveData.value = handleCreditsResponse(response)
             } catch (e: Exception) {
-                _castLiveData.value = NetworkResult.Error("Something went wrong.")
+                _personCreditsLiveData.value = NetworkResult.Error("Something went wrong.")
                 Log.e("MovieDetailsViewModel", e.message.toString())
             }
         }
     }
 
-    private fun handleCastResponse(response: Response<CastList>): NetworkResult<CastList> {
+    private fun handleCreditsResponse(response: Response<MoviesByPerson>): NetworkResult<MoviesByPerson> {
         when {
             response.isSuccessful -> {
-                val castData = response.body()
-                return NetworkResult.Success(castData!!)
+                val personCreditsData = response.body()
+                return NetworkResult.Success(personCreditsData!!)
             }
             else -> return NetworkResult.Error(response.message())
         }
     }
-
 
     // checking internet connection. returns true or false.
 
@@ -110,4 +107,5 @@ class MovieDetailsViewModel @Inject constructor(
             else -> false
         }
     }
+
 }

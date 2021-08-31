@@ -39,7 +39,7 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager) {
 
         binding.apply {
             viewPager2.adapter = pagerAdapter
-
+            viewPager2.isUserInputEnabled = false
             TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
                 tab.text = titles[position]
             }.attach()

@@ -38,3 +38,25 @@ data class MovieResult(
     @Json(name = "video")
     val video: Boolean = false,
 ) : Parcelable
+
+@JsonClass(generateAdapter = true)
+data class MovieDetails(
+    @Json(name = "id")
+    val id: Int = 0,
+    @Json(name = "overview")
+    val overview: String = "",
+    @Json(name = "popularity")
+    val popularity: Double = 0.0,
+    @Json(name = "poster_path")
+    val posterPath: Any? = null,
+    @Json(name = "release_date")
+    val releaseDate: String = "",
+    @Json(name = "revenue")
+    val revenue: Int = 0,
+    @Json(name = "runtime")
+    val runtime: Int = 0,
+    @Json(name = "title")
+    val title: String = "",
+    @Json(name = "video")
+    val video: Boolean = false
+)

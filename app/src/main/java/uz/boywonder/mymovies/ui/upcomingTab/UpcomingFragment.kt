@@ -99,7 +99,7 @@ class UpcomingFragment : Fragment(R.layout.fragment_upcoming),
 
     override fun OnItemClick(movieResult: MovieResult) {
         val action =
-            UpcomingFragmentDirections.actionUpcomingFragmentToMovieDetailsFragment3(movieResult)
+            UpcomingFragmentDirections.actionUpcomingFragmentToMovieDetailsFragment3(movieResult.id)
         findNavController().navigate(action)
     }
 }

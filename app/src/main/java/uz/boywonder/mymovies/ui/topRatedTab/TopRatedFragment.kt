@@ -137,7 +137,7 @@ class TopRatedFragment : Fragment(R.layout.fragment_top_rated),
 
     override fun OnItemClick(movieResult: MovieResult) {
         val action =
-            TopRatedFragmentDirections.actionTopRatedFragmentToMovieDetailsFragment2(movieResult)
+            TopRatedFragmentDirections.actionTopRatedFragmentToMovieDetailsFragment2(movieResult.id)
         findNavController().navigate(action)
     }
 }

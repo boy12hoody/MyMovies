@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="3dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/creditsMovie_imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/CircleImageView"
+        app:strokeColor="@color/strokeColor"
+        app:strokeWidth="1dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/creditsMovie_textView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:maxLines="2"
+        android:text="Movie"
+        android:textSize="22sp"
+        android:layout_marginHorizontal="8dp"
+        android:textAlignment="center"
+        android:textAppearance="?attr/textAppearanceBody2"
+        app:layout_constraintBottom_toBottomOf="@+id/creditsMovie_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/creditsMovie_imageView"
+        app:layout_constraintTop_toTopOf="@+id/creditsMovie_imageView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

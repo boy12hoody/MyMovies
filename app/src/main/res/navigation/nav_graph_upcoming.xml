@@ -19,7 +19,19 @@
         android:label="fragment_movie_details"
         tools:layout="@layout/fragment_movie_details" >
         <argument
-            android:name="movieResult"
-            app:argType="uz.boywonder.mymovies.models.MovieResult" />
+            android:name="movieId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_movieDetailsFragment3_to_actorDetailsFragment3"
+            app:destination="@id/actorDetailsFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/actorDetailsFragment3"
+        android:name="uz.boywonder.mymovies.ui.actorDetails.ActorDetailsFragment"
+        android:label="fragment_actor_details"
+        tools:layout="@layout/fragment_actor_details" >
+        <argument
+            android:name="cast"
+            app:argType="uz.boywonder.mymovies.models.Cast" />
     </fragment>
 </navigation>
