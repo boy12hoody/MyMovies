@@ -9,7 +9,7 @@ The project uses latest methods and best practices as much as possible from arch
   <a href="https://kotlinlang.org/docs/releases.html#release-details"><img alt="Kotlin Version" src="https://img.shields.io/badge/Kotlin-1.5.+-green.svg?style=flat&logo=kotlin"/></a>
   <a href="https://developer.android.com/studio/releases/gradle-plugin#7-0-1"><img alt="Gradle Version" src="https://img.shields.io/badge/Gradle-7.0.1-yellowgreen.svg?style=flat&logo=gradle"/></a>
   <a href="https://android-arsenal.com/api?level=24"><img alt="API" src="https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat"/></a>
-  <a href="https://github.com/boy12hoody/MyMovies/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/boy12hoody/MyRecipes?style=flat"></a>
+  <a href="https://github.com/boy12hoody/MyMovies/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/boy12hoody/MyMovies?style=flat"></a>
   <a href="https://t.me/boywonder"><img alt="Telegram" src="https://img.shields.io/badge/Telegram-@BoyWonder-blue.svg?style=flat&logo=telegram"/></a>
 </p>
 
@@ -49,7 +49,8 @@ Go to the [Releases](https://github.com/boy12hoody/MyMovies/releases) to downloa
 - [Chucker](https://github.com/ChuckerTeam/chucker) - An HTTP inspector for Android & OkHTTP.
 - [Coil](https://github.com/coil-kt/coil) - An image loading library for Android backed by Kotlin Coroutines.
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
-    - [Jetpack](https://developer.android.com/jetpack) -- [Navigation](https://developer.android.com/guide/navigation) - Navigation component designed for apps that have one main activity with multiple fragment destinations.
+    - [Jetpack](https://developer.android.com/jetpack) 
+        - [Navigation](https://developer.android.com/guide/navigation) - Navigation component designed for apps that have one main activity with multiple fragment destinations.
         - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Data objects that notify views when the underlying database changes.
         - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) - Handling lifecycles with lifecycle-aware components.
         - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes.
