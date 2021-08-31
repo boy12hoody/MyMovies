@@ -62,9 +62,6 @@ dependencies {
     // View binding Delegate
     implementation 'com.github.yogacp:android-viewbinding:1.0.3'
 
-    // DataStore
-    implementation 'androidx.datastore:datastore-preferences:1.0.0'
-
     // Recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
