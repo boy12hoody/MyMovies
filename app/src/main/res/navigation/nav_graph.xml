@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/viewPagerFragment"
         android:name="uz.boywonder.mymovies.ui.viewPager.ViewPagerFragment"
-        android:label="fragment_view_pager"
+        android:label="My Movies"
         tools:layout="@layout/fragment_view_pager" >
         <action
             android:id="@+id/action_viewPagerFragment_to_movieDetailsFragment"
@@ -16,22 +16,22 @@
     <fragment
         android:id="@+id/popularFragment"
         android:name="uz.boywonder.mymovies.ui.popularTab.PopularFragment"
-        android:label="fragment_popular"
+        android:label="Popular"
         tools:layout="@layout/fragment_popular" />
     <fragment
         android:id="@+id/topRatedFragment"
         android:name="uz.boywonder.mymovies.ui.topRatedTab.TopRatedFragment"
-        android:label="fragment_top_rated"
+        android:label="Top Rated"
         tools:layout="@layout/fragment_top_rated" />
     <fragment
         android:id="@+id/upcomingFragment"
         android:name="uz.boywonder.mymovies.ui.upcomingTab.UpcomingFragment"
-        android:label="fragment_upcoming"
+        android:label="Upcoming"
         tools:layout="@layout/fragment_upcoming" />
     <fragment
         android:id="@+id/movieDetailsFragment"
         android:name="uz.boywonder.mymovies.ui.movieDetails.MovieDetailsFragment"
-        android:label="fragment_movie_details"
+        android:label="About Movie"
         tools:layout="@layout/fragment_movie_details" >
         <argument
             android:name="movieId"
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/actorDetailsFragment"
         android:name="uz.boywonder.mymovies.ui.actorDetails.ActorDetailsFragment"
-        android:label="fragment_actor_details"
+        android:label="About Actor"
         tools:layout="@layout/fragment_actor_details" >
         <argument
             android:name="cast"
