@@ -9,7 +9,6 @@ The project uses latest methods and best practices as much as possible from arch
   <a href="https://kotlinlang.org/docs/releases.html#release-details"><img alt="Kotlin Version" src="https://img.shields.io/badge/Kotlin-1.5.+-green.svg?style=flat&logo=kotlin"/></a>
   <a href="https://developer.android.com/studio/releases/gradle-plugin#7-0-1"><img alt="Gradle Version" src="https://img.shields.io/badge/Gradle-7.0.1-yellowgreen.svg?style=flat&logo=gradle"/></a>
   <a href="https://android-arsenal.com/api?level=24"><img alt="API" src="https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat"/></a>
-  <a href="https://github.com/boy12hoody/MyMovies/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/boy12hoody/MyMovies?style=flat"></a>
   <a href="https://t.me/boywonder"><img alt="Telegram" src="https://img.shields.io/badge/Telegram-@BoyWonder-blue.svg?style=flat&logo=telegram"/></a>
 </p>
 
@@ -68,7 +67,7 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 
 ## Package Structure
 
-    uz.boywonder.myrecipes          # Root Package
+    uz.boywonder.mymovies          # Root Package
     .
     ├── adapters                    # Adapters for RecyclerView
     |
