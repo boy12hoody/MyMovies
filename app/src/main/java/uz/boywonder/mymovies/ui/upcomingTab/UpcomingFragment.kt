@@ -19,6 +19,7 @@ import uz.boywonder.mymovies.adapters.MoviesListAdapter
 import uz.boywonder.mymovies.databinding.FragmentUpcomingBinding
 import uz.boywonder.mymovies.models.MovieResult
 import uz.boywonder.mymovies.ui.MainViewModel
+import uz.boywonder.mymovies.ui.viewPager.ViewPagerFragmentDirections
 import uz.boywonder.mymovies.util.Constants.Companion.CAT_UPCOMING
 import uz.boywonder.mymovies.util.Constants.Companion.QUERY_PAGE_NUMBER
 import uz.boywonder.mymovies.util.NetworkResult
@@ -98,8 +99,7 @@ class UpcomingFragment : Fragment(R.layout.fragment_upcoming),
     }
 
     override fun OnItemClick(movieResult: MovieResult) {
-        val action =
-            UpcomingFragmentDirections.actionUpcomingFragmentToMovieDetailsFragment3(movieResult.id)
-        findNavController().navigate(action)
+        val action = ViewPagerFragmentDirections.actionViewPagerFragmentToMovieDetailsFragment(movieResult.id)
+        parentFragment?.findNavController()?.navigate(action)
     }
 }

@@ -8,10 +8,48 @@
         android:id="@+id/viewPagerFragment"
         android:name="uz.boywonder.mymovies.ui.viewPager.ViewPagerFragment"
         android:label="fragment_view_pager"
-        tools:layout="@layout/fragment_view_pager" />
-    <action
-        android:id="@+id/action_global_viewPagerFragment"
-        app:destination="@id/viewPagerFragment"
-        app:popUpTo="@id/viewPagerFragment"
-        app:popUpToInclusive="true" />
+        tools:layout="@layout/fragment_view_pager" >
+        <action
+            android:id="@+id/action_viewPagerFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/popularFragment"
+        android:name="uz.boywonder.mymovies.ui.popularTab.PopularFragment"
+        android:label="fragment_popular"
+        tools:layout="@layout/fragment_popular" />
+    <fragment
+        android:id="@+id/topRatedFragment"
+        android:name="uz.boywonder.mymovies.ui.topRatedTab.TopRatedFragment"
+        android:label="fragment_top_rated"
+        tools:layout="@layout/fragment_top_rated" />
+    <fragment
+        android:id="@+id/upcomingFragment"
+        android:name="uz.boywonder.mymovies.ui.upcomingTab.UpcomingFragment"
+        android:label="fragment_upcoming"
+        tools:layout="@layout/fragment_upcoming" />
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="uz.boywonder.mymovies.ui.movieDetails.MovieDetailsFragment"
+        android:label="fragment_movie_details"
+        tools:layout="@layout/fragment_movie_details" >
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_actorDetailsFragment"
+            app:destination="@id/actorDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/actorDetailsFragment"
+        android:name="uz.boywonder.mymovies.ui.actorDetails.ActorDetailsFragment"
+        android:label="fragment_actor_details"
+        tools:layout="@layout/fragment_actor_details" >
+        <argument
+            android:name="cast"
+            app:argType="uz.boywonder.mymovies.models.Cast" />
+        <action
+            android:id="@+id/action_actorDetailsFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
 </navigation>

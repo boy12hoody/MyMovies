@@ -21,6 +21,7 @@ import uz.boywonder.mymovies.adapters.MoviesListAdapter
 import uz.boywonder.mymovies.databinding.FragmentTopRatedBinding
 import uz.boywonder.mymovies.models.MovieResult
 import uz.boywonder.mymovies.ui.MainViewModel
+import uz.boywonder.mymovies.ui.viewPager.ViewPagerFragmentDirections
 import uz.boywonder.mymovies.util.Constants.Companion.CAT_TOP_RATED
 import uz.boywonder.mymovies.util.Constants.Companion.QUERY_PAGE_NUMBER
 import uz.boywonder.mymovies.util.Constants.Companion.QUERY_PAGE_SIZE
@@ -136,8 +137,7 @@ class TopRatedFragment : Fragment(R.layout.fragment_top_rated),
     }
 
     override fun OnItemClick(movieResult: MovieResult) {
-        val action =
-            TopRatedFragmentDirections.actionTopRatedFragmentToMovieDetailsFragment2(movieResult.id)
-        findNavController().navigate(action)
+        val action = ViewPagerFragmentDirections.actionViewPagerFragmentToMovieDetailsFragment(movieResult.id)
+        parentFragment?.findNavController()?.navigate(action)
     }
 }

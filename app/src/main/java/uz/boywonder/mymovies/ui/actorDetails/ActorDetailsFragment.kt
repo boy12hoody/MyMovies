@@ -118,7 +118,10 @@ class ActorDetailsFragment : Fragment(R.layout.fragment_actor_details),
     }
 
     override fun OnItemClick(castByPerson: CastByPerson) {
-//        val action = ActorDetailsFragmentDirections.actionActorDetailsFragmentToMovieDetailsFragment(castByPerson.id)
-//        findNavController().navigate(action)
+        val action =
+            ActorDetailsFragmentDirections.actionActorDetailsFragmentToMovieDetailsFragment(
+                castByPerson.id
+            )
+        findNavController().navigate(action)
     }
 }

@@ -6,14 +6,11 @@ import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import uz.boywonder.mymovies.R
 import uz.boywonder.mymovies.adapters.ViewPagerAdapter
 import uz.boywonder.mymovies.databinding.FragmentViewPagerBinding
@@ -39,7 +36,6 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager) {
 
         binding.apply {
             viewPager2.adapter = pagerAdapter
-            viewPager2.isUserInputEnabled = false
             TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
                 tab.text = titles[position]
             }.attach()
@@ -72,8 +68,6 @@ class ViewPagerFragment : Fragment(R.layout.fragment_view_pager) {
                 }
             }
         }
-
-        // Handle ViewPager State
 
     }
 }

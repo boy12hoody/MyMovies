@@ -10,6 +10,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import uz.boywonder.mymovies.data.Repository
@@ -90,9 +92,6 @@ class MainViewModel @Inject constructor(
         }
         return NetworkResult.Error(response.message())
     }
-
-    /* Handle View Pager State */
-
 
     // checking internet connection. returns true or false.
 

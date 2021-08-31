@@ -130,9 +130,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details),
     }
 
     override fun OnItemClick(cast: Cast) {
-//        val action =
-//            MovieDetailsFragmentDirections.(cast)
-//        findNavController().navigate(action)
+        val action =
+            MovieDetailsFragmentDirections.actionMovieDetailsFragmentToActorDetailsFragment(cast)
+        findNavController().navigate(action)
     }
 
 }

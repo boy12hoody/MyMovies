@@ -21,6 +21,7 @@ import uz.boywonder.mymovies.adapters.MoviesListAdapter
 import uz.boywonder.mymovies.databinding.FragmentPopularBinding
 import uz.boywonder.mymovies.models.MovieResult
 import uz.boywonder.mymovies.ui.MainViewModel
+import uz.boywonder.mymovies.ui.viewPager.ViewPagerFragmentDirections
 import uz.boywonder.mymovies.util.Constants.Companion.CAT_POPULAR
 import uz.boywonder.mymovies.util.Constants.Companion.QUERY_PAGE_NUMBER
 import uz.boywonder.mymovies.util.Constants.Companion.QUERY_PAGE_SIZE
@@ -135,8 +136,7 @@ class PopularFragment : Fragment(R.layout.fragment_popular), MoviesListAdapter.O
     }
 
     override fun OnItemClick(movieResult: MovieResult) {
-        val action =
-            PopularFragmentDirections.actionPopularFragmentToMovieDetailsFragment(movieResult.id)
-        findNavController().navigate(action)
+        val action = ViewPagerFragmentDirections.actionViewPagerFragmentToMovieDetailsFragment(movieResult.id)
+        parentFragment?.findNavController()?.navigate(action)
     }
 }
