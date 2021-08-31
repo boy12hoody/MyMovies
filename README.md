@@ -14,7 +14,7 @@ The project uses latest methods and best practices as much as possible from arch
 </p>
 
 ### Screenshots
-Soon..
+Soon to be added..
 
 ## Status
 No further development. It was meant to test the API..
